@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import ItemCarrinho from "../components/ItemCarrinho";
 import ResumoCompra from "../components/ResumoCompra";
 import { produtos } from "../data/produtos";
@@ -30,6 +31,10 @@ function Carrinho() {
         </div>
       </section>
 
+      <Link className="link-finalizar" to="/pagamento">
+        Finalizar compra
+      </Link>
+      
       <ResumoCompra quantidadeItens={quantidadeItens} total={totalCompra} />
     </main>
   );
