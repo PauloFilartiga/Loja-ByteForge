@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 
 function Falha () {
     return (
-      <main className="pagina-resultado">
+      <main className="pagina-resultado resultado-falha">
         <h1>tentativa de golpe!</h1>
         <p>A compra não foi aprovada.</p>
 

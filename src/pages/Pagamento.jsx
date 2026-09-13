@@ -49,7 +49,7 @@ function Pagamento() {
         total={totalCompra}
       />
 
-      <form onSubmit={handleSubmit(enviarFormulario)} noValidate>
+      <form onSubmit={handleSubmit(enviarFormulario)} noValidate aria-busy={processando}>
         <div>
           <label htmlFor="titular">Nome do titular</label>
           <input
@@ -103,7 +103,7 @@ function Pagamento() {
           {errors.cvv && <p role="alert">{errors.cvv.message}</p>}
         </div>
 
-        <button type="submit" disabled={processando}>
+        <button type="submit" disabled={processando} aria-live="polite">
           {processando ? 'Processando compra...' : 'Finalizar compra'}
         </button>
       </form>

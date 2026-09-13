@@ -30,12 +30,13 @@ function Carrinho() {
           ))}
         </div>
       </section>
+      
+      <ResumoCompra quantidadeItens={quantidadeItens} total={totalCompra} />
 
       <Link className="link-finalizar" to="/pagamento">
         Finalizar compra
       </Link>
-      
-      <ResumoCompra quantidadeItens={quantidadeItens} total={totalCompra} />
+
     </main>
   );
 }
