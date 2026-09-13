@@ -1,16 +1,29 @@
-# React + Vite
+# Checkout React
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicação SPA desenvolvida em React para simular o fluxo de uma compra: carrinho, pagamento, aprovação e falha.
 
-Currently, two official plugins are available:
+## Testes e depuração
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+O fluxo da aplicação foi testado manualmente:
 
-## React Compiler
+- Carrinho com 3 produtos, 4 itens e total de R$ 829,60;
+- Validação dos campos obrigatórios e formatos do cartão;
+- Cartão válido direcionando para a página de sucesso;
+- Cartão com todos os dígitos iguais direcionando para a página de falha;
+- Botão desabilitado durante o processamento;
+- Navegação entre carrinho, pagamento, sucesso e falha;
+- Interface verificada em telas de celular e computador.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Uso do debugger
 
-## Expanding the ESLint configuration
+O `debugger` foi utilizado temporariamente após o processamento do pagamento para inspecionar a variável `compraAprovada`.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Cartão `1111111111111111`: resultado `false`;
+- Cartão `1234567890123456`: resultado `true`.
+
+Após a verificação, o comando `debugger` foi removido do código.
+
+### Verificação técnica
+
+- `npm run lint`: executado sem erros;
+- `npm run build`: compilação concluída com sucesso.
