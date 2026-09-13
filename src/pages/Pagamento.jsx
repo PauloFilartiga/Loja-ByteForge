@@ -1,9 +1,26 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { esquemaPagamento } from "../utils/pagamento";
+import { produtos } from "../data/produtos";
+import ResumoCompra from "../components/ResumoCompra";
+import usePagamento from "../hooks/usePagamento";
 
 function Pagamento() {
+  const navigate = useNavigate()
+
+  const { processando, processarPagamento } = usePagamento()
+
+  const quantidadeItens = produtos.reduce(
+    (total, produto) => total + produto.quantidade,
+    0,
+  )
+
+  const totalCompra = produtos.reduce(
+    (total, produto) => total + produto.precoUnitario * produto.quantidade,
+    0,
+  )
+
   const {
     register,
     handleSubmit,
@@ -12,14 +29,25 @@ function Pagamento() {
     resolver: zodResolver(esquemaPagamento),
   });
 
-  function enviarFormulario() {
-    console.log("Formulário validado com sucesso");
+   async function enviarFormulario(dados) {
+    const compraAprovada = await processarPagamento(dados.numeroCartao)
+
+    if (compraAprovada === null) {
+      return
+    }
+
+    navigate(compraAprovada ? '/sucesso' : '/falha')
   }
 
   return (
     <main className="pagina-pagamento">
       <h1>Pagamento</h1>
       <p>Preencha os dados do cartão para finalizar a compra.</p>
+
+      <ResumoCompra
+        quantidadeItens={quantidadeItens}
+        total={totalCompra}
+      />
 
       <form onSubmit={handleSubmit(enviarFormulario)} noValidate>
         <div>
@@ -75,7 +103,9 @@ function Pagamento() {
           {errors.cvv && <p role="alert">{errors.cvv.message}</p>}
         </div>
 
-        <button type="submit">Continuar</button>
+        <button type="submit" disabled={processando}>
+          {processando ? 'Processando compra...' : 'Finalizar compra'}
+        </button>
       </form>
 
       <Link to="/">Voltar para o carrinho</Link>

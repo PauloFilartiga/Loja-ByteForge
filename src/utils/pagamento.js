@@ -13,3 +13,11 @@ export const esquemaPagamento = z.object({
 
   cvv: z.string().regex(/^\d{3}$/, "Digite exatamente 3 números"),
 });
+
+export function todosDigitosIguais(numeroCartao) {
+  const digitos = numeroCartao.split("");
+
+  return (
+    digitos.length === 16 && digitos.every((digito) => digito === digitos[0])
+  );
+}
