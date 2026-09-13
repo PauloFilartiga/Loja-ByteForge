@@ -6,7 +6,7 @@ function Falha () {
         <h1>tentativa de golpe!</h1>
         <p>A compra não foi aprovada.</p>
 
-        <Link to="/">Tentar novamente</Link>
+        <Link to="/pagamento">Tentar novamente</Link>
       </main>
     );
 }
