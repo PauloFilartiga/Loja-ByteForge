@@ -273,6 +273,12 @@ O comando `debugger` foi inserido temporariamente após o processamento para ins
 | `1111111111111111` |          `false` | Tentativa de golpe |
 | `1234567890123456` |           `true` | Compra aprovada    |
 
+#### Evidência da depuração
+
+A imagem abaixo mostra os valores de `compraAprovada` inspecionados no Console durante a pausa do debugger:
+
+![Validação do pagamento com debugger](docs/images/debugger-validacao-pagamento.png)
+
 Após a verificação, o comando `debugger` foi removido.
 
 ### Verificação técnica
@@ -385,7 +391,7 @@ O vídeo apresenta:
 - Uso do debugger;
 - Possíveis melhorias.
 
-▶️ **Vídeo de apresentação:** será adicionado após a gravação.
+[▶️ Assistir à apresentação do Checkout React](https://youtu.be/pq7iDY7OS_I)
 
 ---
 
