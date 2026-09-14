@@ -354,7 +354,7 @@ O projeto foi organizado em um quadro Kanban com as seguintes colunas:
 - Em andamento;
 - Feito.
 
-🔗 **Kanban do projeto:** `https://www.notion.so/3d85701753e88009b603f2073512230e?v=8ca5701753e882d1b1018845d2095e5c&source=copy_link`
+🔗 **Kanban do projeto:** [Acessar o quadro no Notion](https://wirehaired-kidney-ff1.notion.site/3d85701753e88009b603f2073512230e?v=2155701753e883eb88110822818f1dbd&pvs=143)
 
 ---
 
