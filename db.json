@@ -1,0 +1,112 @@
+{
+  "produtos": [
+    {
+      "id": "1",
+      "nome": "Teclado Mecânico RGB Forge Pro",
+      "descricao": "Teclado mecânico com switches azuis, iluminação RGB customizável e layout ABNT2.",
+      "preco": 249.9,
+      "categoria": "Periféricos",
+      "imagem": "https://images.unsplash.com/photo-1619683322755-4545503f1afa?q=80&w=1074&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 8
+    },
+    {
+      "id": "2",
+      "nome": "Mouse Sem Fio Pulse Precision",
+      "descricao": "Mouse sem fio ergonômico com sensor de 16000 DPI e bateria de longa duração.",
+      "preco": 129.9,
+      "categoria": "Periféricos",
+      "imagem": "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=500&auto=format&fit=crop&q=60",
+      "estoque": 12
+    },
+    {
+      "id": "3",
+      "nome": "Headset Gamer ByteAura 7.1",
+      "descricao": "Headset gamer com som surround 7.1 virtual, microfone com cancelamento de ruído e almofadas respiráveis.",
+      "preco": 319.9,
+      "categoria": "Áudio",
+      "imagem": "https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=500&auto=format&fit=crop&q=60",
+      "estoque": 6
+    },
+    {
+      "id": "4",
+      "nome": "Microfone Condensador Streamer X",
+      "descricao": "Microfone condensador USB com padrão cardióide, suporte articulado e filtro pop integrado.",
+      "preco": 389.9,
+      "categoria": "Áudio",
+      "imagem": "https://images.unsplash.com/photo-1660631228116-b3643559f611?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 5
+    },
+    {
+      "id": "5",
+      "nome": "Monitor Gamer UltraWide 29\"",
+      "descricao": "Monitor IPS 29 polegadas, 75Hz, tempo de resposta de 1ms e tecnologia FreeSync.",
+      "preco": 1199.9,
+      "categoria": "Acessórios & Setup",
+      "imagem": "https://images.unsplash.com/photo-1547658718-1cdaa0852790?q=80&w=764&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 4
+    },
+    {
+      "id": "6",
+      "nome": "Mousepad Gamer Extra Grande Speed",
+      "descricao": "Mousepad com dimensões 900x400mm, bordas costuradas e base de borracha antiderrapante.",
+      "preco": 79.9,
+      "categoria": "Periféricos",
+      "imagem": "https://images.unsplash.com/photo-1676488385135-e1ba8178abd2?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 15
+    },
+    {
+      "id": "7",
+      "nome": "Caixa de Som SoundBar Gamer RGB",
+      "descricao": "Soundbar estéreo compacta para setup, alimentação USB e conexão Bluetooth 5.0.",
+      "preco": 159.9,
+      "categoria": "Áudio",
+      "imagem": "https://plus.unsplash.com/premium_photo-1777867682707-7651e72d0818?q=80&w=1632&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 9
+    },
+    {
+      "id": "8",
+      "nome": "Suporte Articulado a Gás para Monitor",
+      "descricao": "Braço mecânico com pistão a gás para telas de 17 a 32 polegadas com padrão VESA.",
+      "preco": 199.9,
+      "categoria": "Acessórios & Setup",
+      "imagem": "https://images.unsplash.com/photo-1711639670908-c88ccaeb446d?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 7
+    },
+    {
+      "id": "9",
+      "nome": "Cadeira Ergonômica ByteComfort",
+      "descricao": "Cadeira com encosto em tela mesh, apoio lombar ajustável e braços reguláveis 3D.",
+      "preco": 899.9,
+      "categoria": "Acessórios & Setup",
+      "imagem": "https://images.unsplash.com/photo-1688578735427-994ecdea3ea4?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 3
+    },
+    {
+      "id": "10",
+      "nome": "Webcam Full HD 1080p 60FPS",
+      "descricao": "Webcam com foco automático, microfones duplos e tampa de privacidade integrada.",
+      "preco": 289.9,
+      "categoria": "Periféricos",
+      "imagem": "https://images.unsplash.com/photo-1623949556303-b0d17d198863?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 10
+    },
+    {
+      "id": "11",
+      "nome": "Fone In-Ear Intra-auricular Studio",
+      "descricao": "Fones intra-auriculares com drivers duplos balanceados para monitoramento de áudio cristalino.",
+      "preco": 189.9,
+      "categoria": "Áudio",
+      "imagem": "https://images.unsplash.com/photo-1583492207597-5d89ceabb8e8?q=80&w=880&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 14
+    },
+    {
+      "id": "12",
+      "nome": "Luminária de Monitor ScreenBar LED",
+      "descricao": "Barra de luz assimétrica para monitor com controle de temperatura de cor e brilho touch.",
+      "preco": 179.9,
+      "categoria": "Acessórios & Setup",
+      "imagem": "https://images.unsplash.com/photo-1745887787122-59ac9d2000df?q=80&w=1073&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=NHwxMjA3fDA%3D",
+      "estoque": 8
+    }
+  ]
+}
