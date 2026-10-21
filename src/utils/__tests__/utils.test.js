@@ -1,8 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { formatarMoeda } from "../utils/moeda";
-import { calcularTotal, calcularQuantidadeTotal } from "../utils/carrinho";
-import { filtrarProdutos } from "../utils/busca";
-import { todosDigitosIguais } from "../utils/pagamento";
+import { formatarMoeda } from "../moeda";
+import { calcularTotal, calcularQuantidadeTotal } from "../carrinho";
+import { filtrarProdutos } from "../busca";
+import { todosDigitosIguais } from "../pagamento";
 
 describe("Regras de Negócio - Utils", () => {
   // 1. Testes de formatação de moeda
