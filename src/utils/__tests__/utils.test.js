@@ -13,10 +13,23 @@ describe("Regras de Negócio - Utils", () => {
       expect(resultado.replace(/\u00a0/g, " ")).toContain("R$ 249,90");
     });
 
-    it("deve retornar 'R$ 0,00' se receber valor inválido ou não numérico (caminho triste)", () => {
-      expect(formatarMoeda(null)).toBe("R$ 0,00");
-      expect(formatarMoeda(undefined)).toBe("R$ 0,00");
-      expect(formatarMoeda("texto")).toBe("R$ 0,00");
+    it("deve formatar valores em Dólar (USD) e Euro (EUR)", () => {
+      const emDolar = formatarMoeda(100, "USD");
+      const emEuro = formatarMoeda(100, "EUR");
+
+      expect(emDolar).toContain("$100.00");
+      expect(emEuro.replace(/\u00a0/g, " ")).toContain("100,00 €");
+    });
+
+    it("deve retornar zero se receber valor inválido ou não numérico (caminho triste)", () => {
+      expect(formatarMoeda(null).replace(/\u00a0/g, " ")).toContain("R$ 0,00");
+      expect(formatarMoeda(undefined).replace(/\u00a0/g, " ")).toContain(
+        "R$ 0,00",
+      );
+      expect(formatarMoeda("texto").replace(/\u00a0/g, " ")).toContain(
+        "R$ 0,00",
+      );
+      expect(formatarMoeda(null, "USD")).toContain("$0.00");
     });
   });
 
