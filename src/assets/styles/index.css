@@ -1,3 +1,35 @@
+/* ==========================================================================
+   Variáveis de Tema (Light & Dark)
+   ========================================================================== */
+:root {
+  --cor-fundo: #f3f4f6;
+  --cor-superficie: #ffffff;
+  --cor-superficie-destaque: #e0e7ff;
+  --cor-texto: #1f2937;
+  --cor-texto-secundario: #4b5563;
+  --cor-borda: #d1d5db;
+  --cor-borda-input: #9ca3af;
+  --cor-primaria: #1d4ed8;
+  --cor-primaria-hover: #1e40af;
+  --transicao-tema:
+    background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+}
+
+[data-theme="dark"] {
+  --cor-fundo: #0f172a;
+  --cor-superficie: #1e293b;
+  --cor-superficie-destaque: #1e3a8a;
+  --cor-texto: #f8fafc;
+  --cor-texto-secundario: #94a3b8;
+  --cor-borda: #334155;
+  --cor-borda-input: #475569;
+  --cor-primaria: #3b82f6;
+  --cor-primaria-hover: #2563eb;
+}
+
+/* ==========================================================================
+   Estilos Globais
+   ========================================================================== */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -8,8 +40,9 @@ body {
   min-width: 320px;
   min-height: 100vh;
   font-family: Arial, Helvetica, sans-serif;
-  background-color: #f3f4f6;
-  color: #1f2937;
+  background-color: var(--cor-fundo);
+  color: var(--cor-texto);
+  transition: var(--transicao-tema);
 }
 
 button,
@@ -20,35 +53,43 @@ input {
 button {
   cursor: pointer;
 
-  :disabled {
+  &:disabled {
     cursor: not-allowed;
     opacity: 0.65;
   }
 }
 
-
 a {
-  color: #1d4ed8;
+  color: var(--cor-primaria);
   font-weight: 600;
   text-underline-offset: 3px;
 
-  hover {
+  &:hover {
     text-decoration: none;
+  }
 
-    focus-visible,
-    button:focus-visible,
-    input:focus-visible {
-      outline: 3px solid #f59e0b;
-    }
+  &:focus-visible,
+  button:focus-visible,
+  input:focus-visible {
+    outline: 3px solid #f59e0b;
   }
 }
-
-
 
 #root {
   min-height: 100vh;
 }
 
+h1 {
+  margin-bottom: 0.5rem;
+}
+
+h2 {
+  margin-bottom: 1rem;
+}
+
+/* ==========================================================================
+   Páginas e Estruturas
+   ========================================================================== */
 .pagina-carrinho,
 .pagina-pagamento,
 .pagina-resultado {
@@ -62,7 +103,7 @@ a {
   margin-bottom: 2rem;
 
   p {
-    color: #1d4ed8;
+    color: var(--cor-primaria);
     font-weight: 700;
   }
 }
@@ -74,10 +115,11 @@ a {
 
 .item-carrinho {
   padding: 1rem;
-  background-color: #ffffff;
-  border: 1px solid #d1d5db;
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+  transition: var(--transicao-tema);
 
   h3 {
     margin-bottom: 0.5rem;
@@ -87,8 +129,9 @@ a {
 .resumo-compra {
   margin-top: 1.5rem;
   padding: 1rem;
-  background-color: #e0e7ff;
+  background-color: var(--cor-superficie-destaque);
   border-radius: 8px;
+  transition: var(--transicao-tema);
 }
 
 .link-finalizar {
@@ -96,25 +139,18 @@ a {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
   color: #ffffff;
-  background-color: #1d4ed8;
+  background-color: var(--cor-primaria);
   border-radius: 6px;
   text-decoration: none;
 
-  :hover {
-    background-color: #1e40af;
+  &:hover {
+    background-color: var(--cor-primaria-hover);
   }
 }
 
-h1 {
-  margin-bottom: 0.5rem;
-}
-
-h2 {
-  margin-bottom: 1rem;
-}
-
-
-/* estilo do pagamento */
+/* ==========================================================================
+   Página de Pagamento
+   ========================================================================== */
 .pagina-pagamento {
   max-width: 750px;
 
@@ -127,10 +163,11 @@ h2 {
     gap: 1rem;
     margin-bottom: 1rem;
     padding: 1.25rem;
-    background-color: #ffffff;
-    border: 1px solid #d1d5db;
+    background-color: var(--cor-superficie);
+    border: 1px solid var(--cor-borda);
     border-radius: 8px;
     box-shadow: 0 2px 5px rgb(0 0 0 / 15%);
+    transition: var(--transicao-tema);
 
     div {
       display: grid;
@@ -142,11 +179,12 @@ h2 {
 
       input {
         width: 100%;
-        padding: 0.70rem;
-        border: 1px solid #9ca3af;
+        padding: 0.7rem;
+        border: 1px solid var(--cor-borda-input);
         border-radius: 6px;
-        background-color: #ffffff;
-        color: #1f2937;
+        background-color: var(--cor-superficie);
+        color: var(--cor-texto);
+        transition: var(--transicao-tema);
       }
 
       [role="alert"] {
@@ -160,12 +198,12 @@ h2 {
       padding: 0.75rem 1rem;
       color: #ffffff;
       font-weight: 700;
-      background-color: #1d4ed8;
+      background-color: var(--cor-primaria);
       border: 0;
       border-radius: 6px;
 
-      :hover:not(:disabled) {
-        background-color: #1e40af;
+      &:hover:not(:disabled) {
+        background-color: var(--cor-primaria-hover);
       }
     }
   }
@@ -175,8 +213,9 @@ h2 {
   margin-bottom: 1.5rem;
 }
 
-
-/* paginas de resultados */
+/* ==========================================================================
+   Páginas de Resultado (Sucesso e Falha)
+   ========================================================================== */
 .pagina-resultado {
   max-width: 560px;
   min-height: 100vh;
@@ -197,12 +236,12 @@ h2 {
     align-self: center;
     padding: 0.75rem 1rem;
     color: #ffffff;
-    background-color: #1d4ed8;
+    background-color: var(--cor-primaria);
     border-radius: 6px;
     text-decoration: none;
 
-    :hover {
-      background-color: #1e40af;
+    &:hover {
+      background-color: var(--cor-primaria-hover);
     }
   }
 }
@@ -215,8 +254,9 @@ h2 {
   color: #b91c1c;
 }
 
-
-/* adaptação para telas maiores */
+/* ==========================================================================
+   Responsividade (Telas Maiores)
+   ========================================================================== */
 @media (min-width: 768px) {
   .pagina-carrinho,
   .pagina-pagamento {
