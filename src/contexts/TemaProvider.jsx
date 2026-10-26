@@ -1,9 +1,8 @@
-import { createContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { TemaContext } from "./TemaContext.js";
 
-const CHAVE_STORAGE_TEMA = "@byteforge: tema";
-
-const TemaContext = createContext(null);
+const CHAVE_STORAGE_TEMA = "@byteforge:tema";
 
 export function TemaProvider({ children }) {
   const [tema, setTema] = useState(() => {
@@ -13,7 +12,7 @@ export function TemaProvider({ children }) {
         return temaSalvo;
       }
       // Se não tiver preferência salva, verificar a do S.O.
-      return window.matchMedia("(prefers-color-schema: dark)").matches
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
     } catch {
