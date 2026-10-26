@@ -57,7 +57,7 @@ export function CarrinhoProvider({ children }) {
       return [
         ...itensAtuais,
         {
-          id: produto.Id,
+          id: produto.id,
           nome: produto.nome,
           preco: produto.preco ?? produto.precoUnitario,
           imagem: produto.imagem,

@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import { CarrinhoProvider } from "./contexts/CarrinhoProvider";
 import { TemaProvider } from "./contexts/TemaProvider";
 import Layout from "./components/Layout";
+import Produtos from "./pages/Produtos";
 import Carrinho from "./pages/Carrinho";
 import Pagamento from "./pages/Pagamento";
 import Sucesso from "./pages/Sucesso";
@@ -13,7 +14,9 @@ function App() {
       <CarrinhoProvider>
         <Routes>
           <Route element={<Layout />}>
-            <Route path="/" element={<Carrinho />} />
+            <Route path="/" element={<Produtos />} />
+            <Route path="/produtos" element={<Produtos />} />
+            <Route path="/Carrinho" element={<Carrinho />} />
             <Route path="/pagamento" element={<Pagamento />} />
           </Route>
           {/* Páginas de resultado de checkout mantêm tela cheia/focada */}
