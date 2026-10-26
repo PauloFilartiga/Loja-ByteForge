@@ -1,10 +1,9 @@
-import { createContext, useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo } from "react";
 import PropTypes from "prop-types";
+import { CarrinhoContext } from "./CarrinhoContext";
 import { calcularTotal, calcularQuantidadeTotal } from "../utils/carrinho";
 
 const CHAVE_STORAGE = "@byteforge:carrinho";
-
-const CarrinhoContext = createContext(null);
 
 export function CarrinhoProvider({ children }) {
   const [itens, setItens] = useState(() => {
