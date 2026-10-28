@@ -3,10 +3,12 @@ import { CarrinhoProvider } from "./contexts/CarrinhoProvider";
 import { TemaProvider } from "./contexts/TemaProvider";
 import Layout from "./components/Layout";
 import Produtos from "./pages/Produtos";
+import ProdutoDetalhe from "./pages/ProdutoDetalhe";
 import Carrinho from "./pages/Carrinho";
 import Pagamento from "./pages/Pagamento";
 import Sucesso from "./pages/Sucesso";
 import Falha from "./pages/Falha";
+import NaoEncontrada from "./pages/NaoEncontrada";
 
 function App() {
   return (
@@ -16,8 +18,10 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Produtos />} />
             <Route path="/produtos" element={<Produtos />} />
+            <Route path="/produtos/:id" element={<ProdutoDetalhe />} />
             <Route path="/Carrinho" element={<Carrinho />} />
             <Route path="/pagamento" element={<Pagamento />} />
+            <Route path="*" element={<NaoEncontrada />} />
           </Route>
           {/* Páginas de resultado de checkout mantêm tela cheia/focada */}
           <Route path="/sucesso" element={<Sucesso />} />
