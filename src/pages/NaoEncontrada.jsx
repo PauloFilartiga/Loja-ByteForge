@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import iconeVoltar from "../assets/images/icons8-left-48.png";
+import iconeVoltar from "../assets/images/icons8-backhand-index-pointing-left-96.png";
 
 function NaoEncontrada() {
   return (
