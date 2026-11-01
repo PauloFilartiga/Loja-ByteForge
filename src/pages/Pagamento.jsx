@@ -2,24 +2,17 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { esquemaPagamento } from "../utils/pagamento";
-import { produtos } from "../data/produtos";
 import ResumoCompra from "../components/ResumoCompra";
 import usePagamento from "../hooks/usePagamento";
+import { useCarrinho } from "../hooks/useCarrinho";
 
 function Pagamento() {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { processando, processarPagamento } = usePagamento()
+  const { processando, processarPagamento } = usePagamento();
 
-  const quantidadeItens = produtos.reduce(
-    (total, produto) => total + produto.quantidade,
-    0,
-  )
-
-  const totalCompra = produtos.reduce(
-    (total, produto) => total + produto.precoUnitario * produto.quantidade,
-    0,
-  )
+  // Total e quantidade vêm do CarrinhoContext (não mais de dados fixos)
+  const { quantidadeTotal, valorTotal } = useCarrinho();
 
   const {
     register,
@@ -29,27 +22,28 @@ function Pagamento() {
     resolver: zodResolver(esquemaPagamento),
   });
 
-   async function enviarFormulario(dados) {
-    const compraAprovada = await processarPagamento(dados.numeroCartao)
+  async function enviarFormulario(dados) {
+    const compraAprovada = await processarPagamento(dados.numeroCartao);
 
     if (compraAprovada === null) {
-      return
+      return;
     }
 
-    navigate(compraAprovada ? '/sucesso' : '/falha')
+    navigate(compraAprovada ? "/sucesso" : "/falha");
   }
 
   return (
-    <main className="pagina-pagamento">
+    <div className="pagina-pagamento">
       <h1>Pagamento</h1>
       <p>Preencha os dados do cartão para finalizar a compra.</p>
 
-      <ResumoCompra
-        quantidadeItens={quantidadeItens}
-        total={totalCompra}
-      />
+      <ResumoCompra quantidadeItens={quantidadeTotal} total={valorTotal} />
 
-      <form onSubmit={handleSubmit(enviarFormulario)} noValidate aria-busy={processando}>
+      <form
+        onSubmit={handleSubmit(enviarFormulario)}
+        noValidate
+        aria-busy={processando}
+      >
         <div>
           <label htmlFor="titular">Nome do titular</label>
           <input
@@ -104,12 +98,12 @@ function Pagamento() {
         </div>
 
         <button type="submit" disabled={processando} aria-live="polite">
-          {processando ? 'Processando compra...' : 'Finalizar compra'}
+          {processando ? "Processando compra..." : "Finalizar compra"}
         </button>
       </form>
 
-      <Link to="/">Voltar para o carrinho</Link>
-    </main>
+      <Link to="/carrinho">Voltar para o carrinho</Link>
+    </div>
   );
 }
 

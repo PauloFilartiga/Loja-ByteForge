@@ -20,8 +20,7 @@ function App() {
             <Route path="/" element={<Produtos />} />
             <Route path="/produtos" element={<Produtos />} />
             <Route path="/produtos/:id" element={<ProdutoDetalhe />} />
-            <Route path="/Carrinho" element={<Carrinho />} />
-            <Route path="/pagamento" element={<Pagamento />} />
+            <Route path="/carrinho" element={<Carrinho />} />
             <Route
              path="/pagamento"
              element={
