@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { obterProdutoPorId } from "../services/api";
 import { useCarrinho } from "../hooks/useCarrinho";
 import { formatarMoeda } from "../utils/moeda";
-import iconeVoltar from "../assets/images/icons8-left-48.png";
+import iconeVoltar from "../assets/images/icons8-backhand-index-pointing-left-96.png";
 
 function ProdutoDetalhe() {
   const { id } = useParams();
@@ -54,7 +54,7 @@ function ProdutoDetalhe() {
     return (
       <div className="detalhe-container">
         <div className="estado-feedback estado-carregando" role="status">
-          <div className="spiner" aria-hidden="true"></div>
+          <div className="spinner" aria-hidden="true"></div>
           <p>Carregando especificação do produto...</p>
         </div>
       </div>
@@ -63,7 +63,7 @@ function ProdutoDetalhe() {
 
   if (erro || !produto) {
     return (
-      <div className="detalhes-container">
+      <div className="detalhe-container">
         <div className="estado-feedback estado-erro" role="alert">
           <h2>Produto não encontrado</h2>
           <p>
@@ -110,15 +110,28 @@ function ProdutoDetalhe() {
 
   return (
     <div className="detalhe-container">
-      <nav className="breadcrumb" aria-label="Navegação estrutural">
-        <Link to="/produtos">Catálogo</Link>
-        <span aria-hidden="true">/</span>
-        <span className="breadcrumb-ativo">{nome}</span>
-      </nav>
+      {/* Botão de retorno e Breadcrumb alinhados no topo */}
+      <div className="detalhe-navegacao-topo">
+        <Link to="/produtos" className="botao-voltar-topo">
+          <img
+            src={iconeVoltar}
+            alt=""
+            aria-hidden="true"
+            className="icone-voltar-img"
+          />
+          <span>Voltar para o catálogo</span>
+        </Link>
+
+        <nav className="breadcrumb" aria-label="Navegação estrutural">
+          <Link to="/produtos">Catálogo</Link>
+          <span aria-hidden="true">/</span>
+          <span className="breadcrumb-ativo">{nome}</span>
+        </nav>
+      </div>
 
       <section className="detalhe-grid">
-        {/*Galeria / Imagem Principal */}
-        <div className="detaalhe-media">
+        {/* Galeria / Imagem Principal */}
+        <div className="detalhe-media">
           <img src={imagem} alt={nome} className="detalhe-imagem" />
           {categoria && (
             <span className="detalhe-categoria-tag">{categoria}</span>
@@ -134,16 +147,16 @@ function ProdutoDetalhe() {
               className={`status-estoque ${esgotado ? "status-esgotado" : "status-disponivel"}`}
             >
               <span className="dot-estoque" aria-hidden="true" />
-              {esgotado ? "Esgotado" : `${estoque} unidades disponiveis`}
+              {esgotado ? "Esgotado" : `${estoque} unidades disponíveis`}
             </span>
           </div>
 
           <div className="detalhe-bloco-precos">
             <div className="detalhe-pix-linha">
               <span className="detalhe-preco-pix">
-                {formatarMoeda(precoPix)}{" "}
+                {formatarMoeda(precoPix)}
               </span>
-              <span className="detalhe-pix-tag">à vista no Pix(10% OFF)</span>
+              <span className="detalhe-pix-tag">à vista no Pix (10% OFF)</span>
             </div>
             <p className="detalhe-parcelas">
               ou {formatarMoeda(preco)} em até 10x de{" "}
@@ -151,12 +164,12 @@ function ProdutoDetalhe() {
             </p>
           </div>
 
-          <div className="detalhes-descricao-box">
+          <div className="detalhe-descricao-box">
             <h3>Descrição do Produto</h3>
             <p>{descricao || "Sem descrição disponível para este produto."}</p>
           </div>
 
-          {/* Seletor de Qualidade e Ação */}
+          {/* Seletor de Quantidade e Ação */}
           <div className="detalhe-acoes">
             <div className="seletor-quantidade">
               <button
