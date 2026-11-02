@@ -206,7 +206,7 @@ function Produtos() {
 
       {erro && !carregando && (
         <div className="estado-feedback estado-erro" role="alert">
-          <h3>Ocorreu um problema ao carregar</h3>
+          <h2>Ocorreu um problema ao carregar</h2>
           <p>{erro}</p>
           <button
             type="button"
@@ -227,7 +227,7 @@ function Produtos() {
 
       {!carregando && !erro && produtosFiltrados.length === 0 && (
         <div className="estado-feedback estado-vazio">
-          <h3>Nenhum produto encontrado</h3>
+          <h2>Nenhum produto encontrado</h2>
           <p>
             Não encontramos resultados para os filtros selecionados. Tente
             buscar por outro termo ou limpe os filtros.
@@ -249,8 +249,13 @@ function Produtos() {
             {produtosFiltrados.length === 1 ? "produto" : "produtos"}
           </p>
           <div className="catalogo-grid">
-            {produtosFiltrados.map((produto) => (
-              <ProdutoCard key={produto.id} produto={produto} />
+            {produtosFiltrados.map((produto, index) => (
+              <ProdutoCard
+                key={produto.id}
+                produto={produto}
+                // Os primeiros cards aparecem sem rolar: carregam com prioridade (LCP)
+                prioridade={index < 4}
+              />
             ))}
           </div>
         </>

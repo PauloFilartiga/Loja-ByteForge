@@ -4,6 +4,7 @@ import { obterProdutoPorId } from "../services/api";
 import { useCarrinho } from "../hooks/useCarrinho";
 import { formatarMoeda } from "../utils/moeda";
 import iconeVoltar from "../assets/images/icons8-backhand-index-pointing-left-96.png";
+import { urlUnsplash, srcSetUnsplash } from "../utils/imagem";
 
 function ProdutoDetalhe() {
   const { id } = useParams();
@@ -132,7 +133,17 @@ function ProdutoDetalhe() {
       <section className="detalhe-grid">
         {/* Galeria / Imagem Principal */}
         <div className="detalhe-media">
-          <img src={imagem} alt={nome} className="detalhe-imagem" />
+          <img
+            src={urlUnsplash(imagem, { largura: 720, altura: 540 })}
+            srcSet={srcSetUnsplash(imagem, [480, 720, 960])}
+            sizes="(min-width: 1120px) 440px, (min-width: 768px) 42vw, calc(100vw - 32px)"
+            alt={nome}
+            className="detalhe-imagem"
+            width="720"
+            height="540"
+            fetchPriority="high"
+            decoding="async"
+          />
           {categoria && (
             <span className="detalhe-categoria-tag">{categoria}</span>
           )}
