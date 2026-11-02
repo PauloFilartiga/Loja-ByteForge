@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { formatarMoeda } from "../utils/moeda";
 import { useCarrinho } from "../hooks/useCarrinho";
+import { urlUnsplash } from "../utils/imagem";
 import iconeLixeira from "../assets/images/icons8-trash-64.png";
 
 function ItemCarrinho({ item }) {
@@ -31,7 +32,15 @@ function ItemCarrinho({ item }) {
   return (
     <article className="item-carrinho-linha">
       <div className="item-carrinho-imagem-wrapper">
-        <img src={imagem} alt={nome} className="item-carrinho-img" />
+        <img
+          src={urlUnsplash(imagem, { largura: 160, altura: 160 })}
+          alt={nome}
+          className="item-carrinho-img"
+          width="80"
+          height="80"
+          loading="lazy"
+          decoding="async"
+        />
       </div>
 
       <div className="item-carrinho-detalhes">

@@ -3,8 +3,21 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { useCarrinho } from "../hooks/useCarrinho";
 import { formatarMoeda } from "../utils/moeda";
+import { urlUnsplash, srcSetUnsplash } from "../utils/imagem";
 
-function ProdutoCard({ produto, parcelas = 10, descontoPix = 10 }) {
+// Larguras geradas para o srcset (proporção 4:3, igual ao CSS do card)
+const LARGURAS_CARD = [320, 480, 640, 800];
+
+// Quanto o card ocupa da tela em cada breakpoint de .catalogo-grid
+const TAMANHOS_CARD =
+  "(min-width: 1200px) 270px, (min-width: 1024px) calc((100vw - 96px) / 4), (min-width: 600px) calc((100vw - 72px) / 2), calc(100vw - 48px)";
+
+function ProdutoCard({
+  produto,
+  parcelas = 10,
+  descontoPix = 10,
+  prioridade = false,
+}) {
   const { adicionarItem } = useCarrinho();
   const [adicionado, setAdicionado] = useState(false);
   const [favorito, setFavorito] = useState(false);
@@ -57,10 +70,16 @@ function ProdutoCard({ produto, parcelas = 10, descontoPix = 10 }) {
       <div className="produto-media-wrapper">
         <Link to={`/produtos/${id}`} className="produto-link-media">
           <img
-            src={imagem}
+            src={urlUnsplash(imagem, { largura: 400, altura: 300 })}
+            srcSet={srcSetUnsplash(imagem, LARGURAS_CARD)}
+            sizes={TAMANHOS_CARD}
             alt={nome}
             className="produto-imagem"
-            loading="lazy"
+            width="400"
+            height="300"
+            loading={prioridade ? "eager" : "lazy"}
+            fetchPriority={prioridade ? "high" : "auto"}
+            decoding="async"
           />
         </Link>
 
@@ -217,6 +236,7 @@ ProdutoCard.propTypes = {
   }).isRequired,
   parcelas: PropTypes.number,
   descontoPix: PropTypes.number,
+  prioridade: PropTypes.bool,
 };
 
 export default ProdutoCard;

@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import { useCarrinho } from "../hooks/useCarrinho";
 import { useTema } from "../hooks/useTema";
-import logoByteForge from "../assets/images/logo-ByteForge.png";
+import logoByteForge from "../assets/images/byteforge-icon.WebP";
 import iconeTemaEscuro from "../assets/images/icons8-night-96.png";
 import iconeTemaClaro from "../assets/images/icons8-partly-cloudy-day-96.png";
 import iconeCarrinhoVazio from "../assets/images/icons8-shopping-cart-64.png";
@@ -21,7 +21,7 @@ function Header() {
           className="logo-container"
           aria-label="ByteForge Inicio"
         >
-          <img src={logoByteForge} alt="ByteForge" className="logo-img" />
+          <img src={logoByteForge} alt="ByteForge" className="logo-img" width="48" height="48" fetchPriority="high" />
           <span className="logo-texto">ByteForge</span>
         </Link>
 
