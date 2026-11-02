@@ -16,7 +16,7 @@ function Sucesso() {
       <h1>Compra aprovada</h1>
       <p>Seu pagamento foi processado com sucesso.</p>
 
-      <Link to="/produto">Continuar comprando</Link>
+      <Link to="/produtos">Continuar comprando</Link>
     </main>
   );
 }
