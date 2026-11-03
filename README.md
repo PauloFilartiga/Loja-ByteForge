@@ -1,6 +1,8 @@
-# 🛒 Checkout React
+# 🖥️ Loja ByteForge
 
-> Uma experiência de checkout simples, responsiva e acessível, desenvolvida com React.
+> E-commerce de hardware e periféricos desenvolvido com React: catálogo com busca e filtros, detalhe do produto, carrinho persistente e checkout com validação.
+
+🔗 **Acesse o projeto publicado:** [loja-byteforge.vercel.app](https://loja-byteforge.vercel.app/)
 
 ---
 
@@ -8,7 +10,7 @@
 
 Olá! Eu sou **Paulo Filartiga**, estudante de Engenharia de Software e desenvolvedor em formação.
 
-Este projeto foi desenvolvido para praticar conceitos fundamentais do React, como componentização, propriedades, estado, formulários, validação, rotas, processamento assíncrono e organização profissional com Git e GitHub.
+Este projeto é o mini-projeto do Módulo 2 e evolui o Checkout React do módulo anterior para uma loja completa, praticando consumo de API, Context API, rotas dinâmicas, rotas protegidas, testes automatizados, otimização de desempenho e deploy.
 
 🔗 [Meu perfil no GitHub](https://github.com/PauloFilartiga)
 
@@ -16,11 +18,11 @@ Este projeto foi desenvolvido para praticar conceitos fundamentais do React, com
 
 ## 📖 Sobre o projeto
 
-O **Checkout React** simula o fluxo de finalização de uma compra em uma loja virtual.
+A **ByteForge** simula uma loja virtual de hardware e periféricos para setup gamer e de trabalho.
 
-A aplicação apresenta um carrinho com produtos fixos, calcula os subtotais e o valor total da compra, recebe os dados do cartão e simula o processamento do pagamento.
+O cliente navega pelo catálogo, busca e filtra produtos por categoria, consulta os detalhes de cada item, monta o carrinho e finaliza a compra com um formulário de pagamento validado.
 
-O projeto não utiliza back-end nem integração com uma operadora de pagamentos. Todo o fluxo acontece no navegador para fins educacionais.
+Em desenvolvimento, os produtos vêm de uma API simulada com `json-server`. Em produção, a aplicação usa o mesmo `db.json` diretamente, sem depender de um servidor.
 
 ---
 
@@ -28,12 +30,15 @@ O projeto não utiliza back-end nem integração com uma operadora de pagamentos
 
 Uma loja virtual precisa oferecer uma interface para que o cliente consiga:
 
-- Conferir os produtos do carrinho;
-- Visualizar quantidades, subtotais e total;
-- Informar os dados do cartão;
-- Receber mensagens claras de validação;
-- Finalizar a compra;
-- Visualizar o resultado da operação.
+- Navegar por um catálogo de produtos vindo de uma API;
+- Buscar e filtrar produtos por nome e categoria;
+- Ordenar os produtos por menor ou maior preço;
+- Ver os detalhes de cada produto em uma página própria;
+- Adicionar, remover e alterar a quantidade de itens no carrinho;
+- Manter o carrinho salvo mesmo ao recarregar a página;
+- Acessar o pagamento somente com itens no carrinho;
+- Informar os dados do cartão com mensagens claras de validação;
+- Visualizar o resultado da compra.
 
 A aplicação também deve identificar como tentativa de golpe qualquer cartão que possua os 16 dígitos iguais.
 
@@ -41,23 +46,28 @@ A aplicação também deve identificar como tentativa de golpe qualquer cartão 
 
 ## ⚙️ Como a aplicação funciona
 
-O fluxo possui quatro páginas:
+A aplicação possui sete páginas:
 
-| Página    | Rota         | Finalidade                         |
-| --------- | ------------ | ---------------------------------- |
-| Carrinho  | `/`          | Exibe produtos, subtotais e total  |
-| Pagamento | `/pagamento` | Recebe e valida os dados do cartão |
-| Sucesso   | `/sucesso`   | Confirma a aprovação da compra     |
-| Falha     | `/falha`     | Informa a tentativa de golpe       |
+| Página         | Rota              | Finalidade                                           |
+| -------------- | ----------------- | ---------------------------------------------------- |
+| Produtos       | `/` e `/produtos` | Catálogo com busca, filtro por categoria e ordenação |
+| Detalhe        | `/produtos/:id`   | Informações completas de um produto                  |
+| Carrinho       | `/carrinho`       | Itens, quantidades, subtotais e total                |
+| Pagamento      | `/pagamento`      | Rota protegida: exige itens no carrinho              |
+| Sucesso        | `/sucesso`        | Confirma a compra e esvazia o carrinho               |
+| Falha          | `/falha`          | Informa a tentativa de golpe e mantém o carrinho     |
+| Não encontrada | `*`               | Página para rotas inexistentes                       |
 
 ### Fluxo da compra
 
-1. O cliente confere os produtos no carrinho;
-2. Clica em **Finalizar compra**;
-3. Preenche os dados do cartão;
-4. O formulário valida os campos;
-5. A aplicação simula o processamento durante 1,5 segundo;
-6. O cliente é direcionado para a página de sucesso ou falha.
+1. O cliente navega pelo catálogo, usando busca, filtro e ordenação;
+2. Abre a página de detalhe de um produto;
+3. Adiciona produtos ao carrinho, que fica salvo no navegador;
+4. Ajusta as quantidades ou remove itens no carrinho;
+5. Avança para o pagamento, liberado somente com itens no carrinho;
+6. Preenche os dados do cartão, validados em tempo real;
+7. A aplicação simula o processamento;
+8. O cliente é direcionado para a página de sucesso ou de falha.
 
 ---
 
@@ -104,43 +114,43 @@ Exemplo de cartão recusado:
 
 ## ✨ Funcionalidades
 
-- Renderização dos produtos com `map`;
-- Uso de chave estável em listas;
-- Cálculo dos subtotais e total com `reduce`;
-- Formatação dos valores em real brasileiro;
-- Navegação entre quatro páginas;
-- Formulário controlado pelo React Hook Form;
-- Validação dos campos com Zod;
-- Mensagens de erro acessíveis;
-- Processamento assíncrono com `Promise` e `async/await`;
-- Custom hook para a lógica do pagamento;
-- Botão desabilitado durante o processamento;
-- Resultado de sucesso ou tentativa de golpe;
-- Interface responsiva para celular e computador.
+- Catálogo consumido de uma API simulada com `json-server`;
+- Fallback para o `db.json` quando a API não está disponível;
+- Busca por nome com debounce, evitando filtrar a cada tecla;
+- Busca sincronizada com a URL (`/produtos?busca=...`), permitindo compartilhar o resultado;
+- Filtro por categoria e ordenação por menor ou maior preço;
+- Página de detalhe com rota dinâmica;
+- Carrinho global com Context API, persistido no `localStorage`;
+- Adição, remoção e alteração de quantidades;
+- Contador de itens no cabeçalho;
+- Rota protegida para o pagamento;
+- Formulário com React Hook Form e validação com Zod;
+- Processamento assíncrono com botão bloqueado durante o envio;
+- Tema claro e escuro;
+- Página para rotas inexistentes;
+- Imagens responsivas e otimizadas;
+- Interface responsiva e acessível.
 
 ---
 
 ## 🧠 Conceitos aplicados
 
-| Conceito                 | Aplicação no projeto                 |
-| ------------------------ | ------------------------------------ |
-| Componentes funcionais   | Construção das páginas e componentes |
-| JSX                      | Estrutura visual da aplicação        |
-| Props                    | Comunicação entre os componentes     |
-| Arrays e objetos         | Representação dos produtos           |
-| `map`                    | Renderização da lista de produtos    |
-| `reduce`                 | Cálculo de quantidades e valores     |
-| Estado                   | Controle do processamento            |
-| Eventos                  | Envio do formulário                  |
-| Renderização condicional | Mensagens, erros e texto do botão    |
-| React Hook Form          | Gerenciamento do formulário          |
-| Zod                      | Validação dos dados                  |
-| Custom Hook              | Lógica reutilizável do pagamento     |
-| React Router             | Rotas e navegação                    |
-| Promise                  | Simulação da compra                  |
-| `async/await`            | Espera do processamento              |
-| `try/finally`            | Controle seguro do estado            |
-| Módulos ES               | Organização com `import` e `export`  |
+| Conceito                 | Aplicação no projeto                                      |
+| ------------------------ | --------------------------------------------------------- |
+| Componentes funcionais   | Páginas e componentes reutilizáveis                       |
+| Props e PropTypes        | Comunicação e validação dos dados entre componentes       |
+| Context API              | Estado global do carrinho e do tema                       |
+| Custom Hooks             | `useCarrinho`, `useTema`, `useDebounce`, `usePagamento`   |
+| `useEffect`              | Busca de dados e persistência no `localStorage`           |
+| `useMemo`                | Cálculo otimizado do total e da quantidade                |
+| React Router             | Rotas dinâmicas, rota 404 e rota protegida                |
+| `fetch` e `async/await`  | Consumo da API de produtos                                |
+| `try/catch`              | Tratamento de erros e fallback                            |
+| React Hook Form + Zod    | Formulário e validação do pagamento                       |
+| Renderização condicional | Carregamento, erros, carrinho vazio e resultado           |
+| Variáveis de ambiente    | `import.meta.env` para separar desenvolvimento e produção |
+| `srcset` e `sizes`       | Imagens no tamanho certo para cada tela                   |
+| Testes automatizados     | Vitest e React Testing Library                            |
 
 ---
 
@@ -153,6 +163,10 @@ Exemplo de cartão recusado:
 ![React Hook Form](https://img.shields.io/badge/React_Hook_Form-7-EC5990?style=for-the-badge&logo=reacthookform&logoColor=FFFFFF)
 ![Zod](https://img.shields.io/badge/Zod-4-3E67B1?style=for-the-badge&logo=zod&logoColor=FFFFFF)
 ![CSS3](https://img.shields.io/badge/CSS3-Mobile_First-1572B6?style=for-the-badge&logo=css3&logoColor=FFFFFF)
+![Vitest](https://img.shields.io/badge/Vitest-Testes-6E9F18?style=for-the-badge&logo=vitest&logoColor=FFFFFF)
+![Testing Library](https://img.shields.io/badge/Testing_Library-React-E33332?style=for-the-badge&logo=testinglibrary&logoColor=FFFFFF)
+![JSON Server](https://img.shields.io/badge/JSON_Server-API_simulada-000000?style=for-the-badge&logo=json&logoColor=FFFFFF)
+![Vercel](https://img.shields.io/badge/Vercel-Deploy-000000?style=for-the-badge&logo=vercel&logoColor=FFFFFF)
 
 ### Ferramentas
 
@@ -167,38 +181,63 @@ Exemplo de cartão recusado:
 ## 📁 Estrutura do projeto
 
 ```text
-checkout-react/
+loja_byteforge/
 ├── docs/
 │   └── images/
-│       └── lighthouse-100.png
 ├── public/
-│   └── robots.txt
+│   ├── _redirects
+│   ├── apple-touch-icon.png
+│   └── favicon-32.png
 ├── src/
+│   ├── __tests__/
+│   │   └── componentes.test.jsx
 │   ├── assets/
+│   │   ├── images/
 │   │   └── styles/
 │   │       └── index.css
 │   ├── components/
+│   │   ├── Footer.jsx
+│   │   ├── Header.jsx
 │   │   ├── ItemCarrinho.jsx
-│   │   └── ResumoCompra.jsx
-│   ├── data/
-│   │   └── produtos.js
+│   │   ├── Layout.jsx
+│   │   ├── ProdutoCard.jsx
+│   │   ├── ResumoCompra.jsx
+│   │   └── RotaPrivada.jsx
+│   ├── contexts/
+│   │   ├── CarrinhoContext.js
+│   │   ├── CarrinhoProvider.jsx
+│   │   ├── TemaContext.js
+│   │   └── TemaProvider.jsx
 │   ├── hooks/
-│   │   └── usePagamento.js
+│   │   ├── useCarrinho.js
+│   │   ├── useDebounce.js
+│   │   ├── usePagamento.js
+│   │   └── useTema.js
 │   ├── pages/
 │   │   ├── Carrinho.jsx
+│   │   ├── Falha.jsx
+│   │   ├── NaoEncontrada.jsx
 │   │   ├── Pagamento.jsx
-│   │   ├── Sucesso.jsx
-│   │   └── Falha.jsx
+│   │   ├── ProdutoDetalhe.jsx
+│   │   ├── Produtos.jsx
+│   │   └── Sucesso.jsx
+│   ├── services/
+│   │   └── api.js
 │   ├── utils/
+│   │   ├── __tests__/
+│   │   ├── busca.js
+│   │   ├── carrinho.js
+│   │   ├── imagem.js
+│   │   ├── moeda.js
 │   │   └── pagamento.js
 │   ├── App.jsx
-│   └── main.jsx
-├── .gitignore
+│   ├── main.jsx
+│   └── setupTests.js
+├── db.json
 ├── eslint.config.js
 ├── index.html
-├── package-lock.json
 ├── package.json
-├── README.md
+├── vercel.json
 └── vite.config.js
 ```
 
@@ -217,22 +256,27 @@ Antes de começar, tenha instalado:
 ### Clonando o repositório
 
 ```bash
-git clone https://github.com/PauloFilartiga/checkout-react.git
+git clone https://github.com/PauloFilartiga/Loja-ByteForge.git
 ```
 
 Entre na pasta:
 
 ```bash
-cd checkout-react
-```
-
-Instale as dependências:
-
-```bash
+cd Loja-ByteForge
 npm install
 ```
 
-Inicie o projeto:
+I### Rodando em desenvolvimento
+
+O projeto precisa de **dois terminais** abertos ao mesmo tempo.
+
+No primeiro, inicie a API simulada:
+
+```bash
+npm run api
+```
+
+No segundo, inicie a aplicação:
 
 ```bash
 npm run dev
@@ -244,63 +288,66 @@ Abra no navegador o endereço exibido pelo Vite, normalmente:
 http://localhost:5173
 ```
 
+Se a API não estiver rodando, a aplicação usa os dados do `db.json` automaticamente.
+
+### Scripts disponíveis
+
+| Comando           | Descrição                                 |
+| ----------------- | ----------------------------------------- |
+| `npm run dev`     | Inicia o servidor de desenvolvimento      |
+| `npm run api`     | Inicia o json-server na porta 3001        |
+| `npm test`        | Executa os testes automatizados           |
+| `npm run lint`    | Verifica a qualidade do código            |
+| `npm run build`   | Gera a versão de produção na pasta `dist` |
+| `npm run preview` | Executa localmente a versão de produção   |
+
 ---
 
-## 🧪 Testes e depuração
+## 🧪 Testes
 
-O fluxo foi testado manualmente durante o desenvolvimento:
+O projeto possui **21 testes automatizados** em 3 arquivos, escritos com Vitest e React Testing Library:
 
-- Carrinho com 3 produtos;
-- Quantidade total de 4 itens;
-- Valor total de R$ 829,60;
-- Campos obrigatórios;
-- Número do cartão com 16 dígitos;
-- Validade no formato `MM/AA`;
-- Validação do mês;
-- CVV com 3 dígitos;
-- Processamento assíncrono;
-- Bloqueio de novos envios;
-- Rotas de sucesso e falha;
-- Links de retorno;
-- Responsividade no celular e computador.
+| Arquivo                              | O que é testado                                            |
+| ------------------------------------ | ---------------------------------------------------------- |
+| `src/utils/__tests__/utils.test.js`  | Formatação de moeda, busca, carrinho e pagamento           |
+| `src/utils/__tests__/imagem.test.js` | Otimização das URLs de imagem e geração do `srcset`        |
+| `src/__tests__/componentes.test.jsx` | Renderização e interação do `ProdutoCard` e `ItemCarrinho` |
 
-### Uso do debugger
-
-O comando `debugger` foi inserido temporariamente após o processamento para inspecionar a variável `compraAprovada`.
-
-| Cartão testado     | Valor encontrado | Resultado          |
-| ------------------ | ---------------: | ------------------ |
-| `1111111111111111` |          `false` | Tentativa de golpe |
-| `1234567890123456` |           `true` | Compra aprovada    |
-
-#### Evidência da depuração
-
-A imagem abaixo mostra os valores de `compraAprovada` inspecionados no Console durante a pausa do debugger:
-
-![Validação do pagamento com debugger](docs/images/debugger-validacao-pagamento.png)
-
-Após a verificação, o comando `debugger` foi removido.
-
-### Verificação técnica
+Os testes cobrem o caminho feliz e os casos de erro, como valores inválidos, URLs de outros domínios e cartões com dígitos repetidos.
 
 ```bash
-npm run lint
-npm run build
+npm test
 ```
 
-Os dois comandos foram executados sem erros.
+### Testes manuais
+
+Além dos testes automatizados, o fluxo completo foi validado no navegador:
+
+- Acesso direto a `/pagamento` com o carrinho vazio redireciona para `/carrinho`;
+- O total do pagamento corresponde ao total do carrinho;
+- Compra aprovada esvazia o carrinho;
+- Compra recusada mantém os itens no carrinho;
+- Recarregar uma página interna funciona no site publicado.
 
 ---
 
 ## 📊 Resultado do Lighthouse
 
-A avaliação final foi executada utilizando o build de produção da aplicação.
+A avaliação foi executada no build de produção (`npm run preview`), em aba anônima.
 
-| Desempenho | Acessibilidade | Práticas recomendadas | SEO |
-| ---------: | -------------: | --------------------: | --: |
-|        100 |            100 |                   100 | 100 |
+| Momento              | Desempenho | Acessibilidade | Práticas recomendadas |     SEO |
+| -------------------- | ---------: | -------------: | --------------------: | ------: |
+| Antes da otimização  |         54 |             94 |                    77 |     100 |
+| Depois da otimização |     **92** |        **100** |                    94 | **100** |
 
-![Resultado final do Lighthouse](docs/images/lighthouse-100.png)
+As principais melhorias foram:
+
+- Imagens do Unsplash entregues no tamanho exibido e em formato AVIF, reduzindo a economia estimada de 456 KiB para 31 KiB;
+- Prioridade de carregamento para as primeiras imagens do catálogo (LCP);
+- Favicon de 1,5 MB substituído por um PNG de 3 kB;
+- Correção de um `<main>` aninhado na página de pagamento.
+
+![Resultado do Lighthouse](docs/images/lighthouse-byteforge.png)
 
 ---
 
@@ -323,94 +370,104 @@ A interface foi construída com foco em:
 
 ## 🌿 Versionamento com Git e GitHub
 
-O desenvolvimento foi organizado com:
+O desenvolvimento foi organizado com o fluxo:
 
 ```text
 branch de tarefa → develop → main
 ```
 
-Branches utilizadas:
+Cada card do Kanban teve sua própria branch, e toda alteração passou por teste, commit, push e Pull Request antes do merge na `develop`. A `main` recebe apenas a versão final e é publicada automaticamente na Vercel.
 
-- `feat/estrutura-inicial`;
-- `feat/dados-produtos`;
-- `feat/carrinho-compras`;
-- `feat/rotas-navegacao`;
-- `feat/formulario-pagamento`;
-- `feat/processamento-pagamento`;
-- `feat/interface-responsiva`;
-- `test/fluxo-completo`;
-- `docs/readme`.
+Branches do projeto ByteForge:
 
-Cada funcionalidade foi testada antes do commit, push, Pull Request e merge na `develop`.
+| Card | Branch                          | Objetivo                                         |
+| :--: | ------------------------------- | ------------------------------------------------ |
+|  1   | `feat/api-simulada-e-setup`     | Configuração inicial e API com json-server       |
+|  2   | `feat/utils-e-testes`           | Funções utilitárias e testes unitários           |
+|  2   | `feat/suporte-multiplas-moedas` | Formatação de valores em BRL, USD e EUR          |
+|  3   | `feat/servico-api`              | Camada de serviço com fetch e fallback           |
+|  4   | `feat/carrinho-context`         | Carrinho global com Context API e persistência   |
+|  5   | `feat/tema-context`             | Tema claro e escuro                              |
+|  6   | `feat/layout-footer`            | Layout base, Header e Footer                     |
+|  7   | `feat/catalogo-e-busca`         | Catálogo com busca, debounce, filtro e ordenação |
+|  8   | `feat/detalhe-produto-e-404`    | Página de detalhe e rota inexistente             |
+|  9   | `feat/carrinho-e-rota-privada`  | Tela do carrinho e rota privada de checkout      |
+|  10  | `test/componente-catalogo`      | Testes de componentes com Testing Library        |
+|  11  | `docs/readme-e-deploy`          | Build, deploy e documentação final               |
+|  12  | `fix/rota-privada-pagamento`    | Correção da rota protegida e do total            |
+|  13  | `perf/otimizacao-imagens`       | Otimização de imagens para o Lighthouse          |
+
+Os prefixos seguem o padrão Conventional Commits: `feat` para funcionalidades, `fix` para correções, `test` para testes, `perf` para desempenho e `docs` para documentação.
 
 ---
 
 ## 📋 Planejamento com Kanban
 
-O projeto foi organizado em um quadro Kanban com as seguintes colunas:
+O projeto foi planejado em um quadro Kanban no Notion, com **13 cards**. Cada card registra a descrição da tarefa, o estado, o responsável e a branch correspondente no Git.
+
+O quadro possui as colunas:
 
 - Backlog;
 - A Fazer;
 - Em andamento;
 - Feito.
 
-🔗 **Kanban do projeto:** [Acessar o quadro no Notion](https://wirehaired-kidney-ff1.notion.site/3d85701753e88009b603f2073512230e?v=2155701753e883eb88110822818f1dbd&pvs=143)
+Os cards marcados como **[Bônus]** são funcionalidades extras além do mínimo pedido, e os cards **[Fix]** e **[Perf]** foram criados durante a revisão final, registrando correções e otimizações encontradas com testes e com o Lighthouse.
+
+🔗 **Kanban do projeto:** [Acessar o quadro no Notion](https://wirehaired-kidney-ff1.notion.site/8765701753e88307afa701620249257a?v=d775701753e88371a7d2086435f7a796)
 
 ---
 
 ## 🤖 Uso de inteligência artificial
 
-A inteligência artificial foi utilizada como ferramenta de apoio durante o desenvolvimento para:
+A inteligência artificial foi utilizada como ferramenta de apoio para:
 
-- Organizar o projeto em etapas;
-- Explicar conceitos do React;
-- Sugerir melhorias de acessibilidade e responsividade;
-- Auxiliar na investigação de erros;
-- Orientar o uso do debugger;
-- Revisar o fluxo de testes.
+- Revisar o código antes da entrega, o que revelou uma rota de pagamento duplicada sem proteção e o pagamento usando dados fixos;
+- Investigar o relatório do Lighthouse e otimizar a entrega das imagens;
+- Explicar conceitos como `srcset`, `sizes`, `fetchPriority` e `import.meta.env`;
+- Configurar o deploy na Vercel e o roteamento das páginas internas;
+- Organizar o fluxo de branches e os cards de correção no Kanban;
+- Apoiar a escrita da documentação.
 
-Todas as sugestões foram analisadas, digitadas, testadas e validadas pelo autor antes de serem adicionadas ao projeto.
+Todo o código sugerido foi digitado, testado etapa por etapa e validado pelo autor antes de cada commit. A documentação foi revisada e ajustada para refletir o projeto real.
 
 A IA não substituiu o processo de aprendizagem nem a compreensão do código.
 
 ---
 
-## 🎥 Vídeo de apresentação
+### Roteiro da apresentação
 
 O vídeo apresenta:
 
-- Objetivo do projeto;
-- Planejamento no Kanban;
-- Organização das branches;
-- Estrutura de pastas;
-- Funcionamento do carrinho;
-- Validação do formulário;
-- Processamento da compra;
-- Rotas de sucesso e falha;
-- Responsividade;
-- Uso do debugger;
-- Possíveis melhorias.
+1. **Introdução:** apresentação pessoal e objetivo da ByteForge;
+2. **Planejamento:** quadro Kanban no Notion e a relação entre cards e branches;
+3. **Estrutura do código:** organização das pastas, contexts, hooks, services e utils;
+4. **Catálogo:** busca com debounce, filtro por categoria e ordenação por preço;
+5. **Detalhe e 404:** rota dinâmica e página de rota inexistente;
+6. **Carrinho:** adição, quantidades, remoção e persistência ao recarregar;
+7. **Checkout:** rota protegida, validação do formulário, compra aprovada e recusada;
+8. **Tema:** alternância entre claro e escuro;
+9. **Qualidade:** execução dos testes e comparação do Lighthouse antes e depois;
+10. **Deploy:** site publicado na Vercel;
+11. **Encerramento:** aprendizados e melhorias futuras.
 
-[▶️ Assistir à apresentação do Checkout React](https://youtu.be/pq7iDY7OS_I)
+[▶️ Assistir à apresentação] [YouTube](https://youtu.be/ddG2-Qr4CQM)
 
 ---
 
 ## 🔮 Melhorias futuras
 
-- Permitir alteração das quantidades;
-- Adicionar e remover produtos;
-- Consumir produtos de uma API;
-- Persistir o carrinho no navegador;
-- Criar testes automatizados;
-- Adicionar uma página para rota inexistente;
-- Integrar um back-end;
-- Implementar uma operação real de pagamento.
+- Exibir os preços em dólar e euro com cotação em tempo real, aproveitando a função `formatarMoeda`, que já suporta BRL, USD e EUR;
+- Reorganizar os componentes no padrão Atomic Design (atoms, molecules e organisms);
+- Integrar um back-end real e um meio de pagamento;
+- Adicionar autenticação de usuários e histórico de pedidos;
+- Ampliar a cobertura de testes para as páginas.
 
 ---
 
 ## 📚 Aprendizados
 
-Este projeto permitiu praticar a construção de uma aplicação React completa, desde a modelagem dos dados até a navegação e validação do pagamento.
+Este projeto permitiu evoluir uma aplicação React simples para uma loja completa, com dados vindos de uma API, estado global, rotas protegidas, testes automatizados e publicação na internet.
 
 Além da parte técnica, o desenvolvimento reforçou a importância de:
 
@@ -421,6 +478,8 @@ Além da parte técnica, o desenvolvimento reforçou a importância de:
 - Escrever commits claros;
 - Utilizar branches e Pull Requests;
 - Produzir uma documentação compreensível.
+- Revisar o projeto antes de entregar, registrando as correções no Kanban;
+- Medir o desempenho com dados reais antes de otimizar.
 
 ---
 
@@ -436,7 +495,7 @@ Estudante de Engenharia de Software e desenvolvedor em formação.
 
 ## 💬 Considerações finais
 
-O Checkout React representa mais uma etapa da minha evolução como desenvolvedor.
+O A ByteForge representa representa mais uma etapa da minha evolução como desenvolvedor.
 
 Cada componente, validação, teste e correção contribuiu para transformar os conteúdos estudados em uma aplicação funcional, organizada e compreensível.
 
