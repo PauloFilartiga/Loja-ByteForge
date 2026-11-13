@@ -225,6 +225,8 @@ loja_byteforge/
 │   │   └── api.js
 │   ├── utils/
 │   │   ├── __tests__/
+│   │   │   ├── utils.test.js
+│   │   │   └── imagem.test.js
 │   │   ├── busca.js
 │   │   ├── carrinho.js
 │   │   ├── imagem.js
@@ -266,7 +268,7 @@ cd Loja-ByteForge
 npm install
 ```
 
-I### Rodando em desenvolvimento
+### Rodando em desenvolvimento
 
 O projeto precisa de **dois terminais** abertos ao mesmo tempo.
 
@@ -435,7 +437,7 @@ A IA não substituiu o processo de aprendizagem nem a compreensão do código.
 
 ---
 
-### Roteiro da apresentação
+## Roteiro da apresentação
 
 O vídeo apresenta:
 
@@ -451,7 +453,7 @@ O vídeo apresenta:
 10. **Deploy:** site publicado na Vercel;
 11. **Encerramento:** aprendizados e melhorias futuras.
 
-[▶️ Assistir à apresentação] [YouTube](https://youtu.be/ddG2-Qr4CQM)
+[▶️ Assistir à apresentação no YouTube](https://youtu.be/ddG2-Qr4CQM)
 
 ---
 
@@ -477,7 +479,7 @@ Além da parte técnica, o desenvolvimento reforçou a importância de:
 - Investigar erros com o debugger;
 - Escrever commits claros;
 - Utilizar branches e Pull Requests;
-- Produzir uma documentação compreensível.
+- Produzir uma documentação compreensível;
 - Revisar o projeto antes de entregar, registrando as correções no Kanban;
 - Medir o desempenho com dados reais antes de otimizar.
 
@@ -495,7 +497,7 @@ Estudante de Engenharia de Software e desenvolvedor em formação.
 
 ## 💬 Considerações finais
 
-O A ByteForge representa representa mais uma etapa da minha evolução como desenvolvedor.
+O A ByteForge representa mais uma etapa da minha evolução como desenvolvedor.
 
 Cada componente, validação, teste e correção contribuiu para transformar os conteúdos estudados em uma aplicação funcional, organizada e compreensível.
 
